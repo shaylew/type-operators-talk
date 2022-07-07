@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "exactOptionalPropertyTypes": false,
+      "noImplicitAny": true,
+      "noImplicitThis": true,
+      "noImplicitOverride": true,
+      "noImplicitReturns": true,
+      "strict": true,
+      "lib": ["es2019", "DOM"],
+      "target": "es2019",
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "resolveJsonModule": true,
+      "noEmit": true,
+      "skipLibCheck": true,
+      "allowJs": true,
+    },
+    "include": ["./src/**/*.ts"]
+  }
