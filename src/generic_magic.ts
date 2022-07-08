@@ -98,13 +98,40 @@ function tradeUp<S extends Suit> (yours: [Rank, S]): ['A', S] {
 // - Give me all the cards.
 // I'll:
 // - Give you back a card
-// - I promise it'll match
-function draw<D extends [Card, ...Card[]]> (deck: D): D[number]
+// - I promise it'll match one of the cards you gave me.
+function draw<D extends [Card, ...Card[]]> (deck: D): D[number] {
+  return deck[deck.length - 1]
+}
+
+// Return type says it's one of those two.
+const drawn = draw([queenOfHearts, jackOfSpades])
+
+function drawFirst<D extends [Card, ...Card[]]> (deck: D): D[0] {
+  return deck[0]
+}
+
+// Return type says it's specifically the queen of hearts.
+const drawnFirst = drawFirst([queenOfHearts, jackOfSpades])
 
 // You:
-// - Pick a card, and show the audience.
+// - Name a card to the audience.
+//
 // I'll:
-// - Stare into your soul, then pull out an identical card.
+// - Stare into your soul, then pull out that card.
 function magic<C extends Card> (): C {
   // Try as you might, you won't be able to hold up your end of this contract.
+  // You can make it typecheck if you vanish in a puff of smoke, though.
+  throw new Error('I give up')
+}
+
+// You:
+// - Name a card to the audience.
+//
+// I'll:
+// - Give you a stack of 0 or more copies of that card.
+// - I actually sealed the stack in a box before you even picked it!
+// - Spooky, huh?
+// - (Well, maybe not...)
+function emptyPromise<C extends Card> (): C[] {
+  return []
 }

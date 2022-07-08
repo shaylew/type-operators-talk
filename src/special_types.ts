@@ -51,8 +51,16 @@ function throws (): never {
   throw new Error('instead of returning never, I just gave up')
 }
 
-// never is assignable to any type.
-isAssignable<string>(throws())
+/**
+ * Useful utility for working with code that the type system says is
+ * unreachable, but which might happen at runtime if someone subverts the type
+ * system with `any` or `as`. You have to pass in a `never` to prove it's
+ * supposed to be impossible, but you also have a helpful message if it happens
+ * somehow anyway.
+ */
+function impossible (why: never, message = 'The "impossible" happened'): never {
+  throw new Error(message)
+}
 
 function tagNumber (tag: 'a' | 'b'): 1 | 2 {
   switch (tag) {
@@ -61,10 +69,6 @@ function tagNumber (tag: 'a' | 'b'): 1 | 2 {
     case 'b':
       return 2
     default:
-      // Each branch removes a possible value from the union type, so once
-      // you've dealt with them all you're left with never.
-      isAssignable<never>(tag)
-
       // Even though the types say this branch is impossible, if you include the
       // default branch TS will require you to either return something or throw.
 
@@ -77,16 +81,8 @@ function tagNumber (tag: 'a' | 'b'): 1 | 2 {
   }
 }
 
-/**
- * Useful utility for working with code that the type system says is
- * unreachable, but which might happen at runtime if someone subverts the type
- * system with `any` or `as`. You have to pass in a `never` to prove it's
- * supposed to be impossible, but you also have a helpful message if it happens
- * somehow anyway.
- */
-function impossible (why: never, message = 'The "impossible" happened'): never {
-  throw new Error(message)
-}
+// never is assignable to any type.
+isAssignable<string>(throws())
 
 // ***
 // *** void

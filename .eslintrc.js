@@ -21,10 +21,13 @@ module.exports = {
     camelcase: 'off',
     "no-unused-vars": "off",
     // Example code; don't want to have to type "export" everywhere.
-    "@typescript-eslint/no-unused-vars": ["off"],
+    "@typescript-eslint/no-unused-vars": "off",
     // Example code: want to be able to write types that could be interfaces.
-    "@typescript-eslint/consistent-type-definitions": ["off"],
+    "@typescript-eslint/consistent-type-definitions": "off",
     // Example code: you shouldn't do these things with void but you _can_.
-    "@typescript-eslint/no-invalid-void-type": ["off"]
+    "@typescript-eslint/no-invalid-void-type": "off",
+    // For didactic purposes we're sometimes over-annotating.
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/naming-convention": "off"
   }
 }
